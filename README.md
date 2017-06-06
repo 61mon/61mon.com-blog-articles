@@ -1,6 +1,9 @@
 # 61mon.com-blog-articles
 
-**注意：所有文章均采用[知识共享署名 - 非商业性使用 - 禁止演绎 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh) 国际许可协议进行许可。若要转载，请附上作者和原文链接。**
+**注意**
+*  所有文章均采用[知识共享署名 - 非商业性使用 - 禁止演绎 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh) 国际许可协议进行许可。若要转载，请附上作者和原文链接。
+
+*  对于某些文章头部的“系列文章目录”等信息，因与文章内容无关，所以不会作出更新。
 
 ### 1. 这个项目是干嘛的？
 
