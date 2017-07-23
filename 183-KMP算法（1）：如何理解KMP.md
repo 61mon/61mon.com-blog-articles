@@ -274,7 +274,7 @@ void GetNextval(string P, int nextval[])
 			if (P[i] != P[j])
 			    nextval[i] = j;
 			else
-			    nextval[i] = nextval[j];  //既然相同就继续往前找前缀
+			    nextval[i] = nextval[j];  //既然相同就继续往前找真前缀
 		}
 		else
 			j = nextval[j];
