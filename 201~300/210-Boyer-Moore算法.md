@@ -219,7 +219,7 @@ void GetGS(string & p, int & m, int gs[])
 
 ![](http://oi0fekpsr.bkt.clouddn.com/Boyer-Moore%E7%AE%97%E6%B3%95__20.png)
 
-如上图，串p的长度为m，i是当前正准备计算`suff[]`值的那个位置。再设置两个变量，f和g。g代表以f为起始位置的字符匹配成功的最左边界，即"g = 最后一个成功匹配位置 + 1"。
+如上图，串p的长度为m，i是当前正准备计算`suff[]`值的那个位置。再设置两个变量，f和g。g代表以f为起始位置的字符匹配成功的最左边界，即"g = 最后一个成功匹配位置 - 1"。
 
 当i处于f和g之间并且`suff[m - 1 - (f - i)] < i - g`，根据`suff[f]`，我们可以推断出`suff[i] = suff[m - 1 - (f - i)]`，图中椭圆的长度即为`suff[m - 1 - (f - i)]`。
 
