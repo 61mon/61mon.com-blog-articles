@@ -311,6 +311,12 @@ for (int i = 0; i <= m - 2; i++)
 ## 四：完整代码
 
 ```c++
+/**
+ * 
+ * author 刘毅（Limer）
+ * date   2017-07-26
+ * mode   C++ 
+ */
 #include <iostream>
 #include <string>
 #include <algorithm>
