@@ -114,7 +114,7 @@ int main()
 
 	for (int i = 0; i < vertex_num; i++)
 		for (int j = 0; j < vertex_num; j++)
-			matrix[i][j] = INT_MAX;  //初始化matrix数组
+			matrix[i][j] = (i != j) ? INT_MAX : 0;  //初始化matrix数组
 
 	cout << "请输入弧的信息：\n";
 	int u, v, w;
