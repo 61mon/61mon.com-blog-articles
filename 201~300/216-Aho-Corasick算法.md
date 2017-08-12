@@ -95,7 +95,7 @@ private:
 public:
     AC();
     ~AC();
-    void _delete(Node * _t);
+    void _destroy(Node * _t);
     void add(char * s);
     void build_fail_pointer();
     int ac_automaton(char * t);
@@ -108,14 +108,14 @@ AC::AC()
 
 AC::~AC()
 {
-    _delete(root);
+    _destroy(root);
 }
 
-void AC::_delete(Node * _t)
+void AC::_destroy(Node * _t)
 {
     for (int i = 0; i < TREE_WIDTH; i++)
         if (_t->next[i])
-            _delete(_t->next[i]);
+            _destroy(_t->next[i]);
     delete _t;
 }
 
