@@ -8,31 +8,35 @@ Aho–Corasick算法（也称AC算法，AC自动机）是由Alfred V. Aho和Marg
 
 AC算法建立在字典树基础上，如果您还不了解字典树，可以参考[字典树入门](http://www.61mon.com/index.php/archives/215/)。
 
+
+<!--more-->
+
+
 ## 二：算法过程分析
 
 以上述所说的典型应用为例，现给定3个单词{"china", "hit", "use"}，再给定一段文本"chitchat"，求有多少个单词出现在文本中。
 
 （1）
 
-![](http://oi0fekpsr.bkt.clouddn.com/AC%E7%AE%97%E6%B3%95_1.png)
+![](http://oi0fekpsr.bkt.clouddn.com/AC%E7%AE%97%E6%B3%95_1.png#mirages-width=590&mirages-height=410&mirages-cdn-type=1)
 
 根据单词{"china", "hit", "use"}建立字典树。
 
 （2）
 
-![](http://oi0fekpsr.bkt.clouddn.com/AC%E7%AE%97%E6%B3%95_2.png)
+![](http://oi0fekpsr.bkt.clouddn.com/AC%E7%AE%97%E6%B3%95_2.png#mirages-width=590&mirages-height=410&mirages-cdn-type=1)
 
 根据所给文本“chitchat”依次匹配，图中所示“chi”为匹配成功的字符串。
 
 （3）
 
-![](http://oi0fekpsr.bkt.clouddn.com/AC%E7%AE%97%E6%B3%95_3.png)
+![](http://oi0fekpsr.bkt.clouddn.com/AC%E7%AE%97%E6%B3%95_3.png#mirages-width=590&mirages-height=410&mirages-cdn-type=1)
 
 当匹配到第四个字符时，“t”和“n”匹配失败。
 
 （4）
 
-![](http://oi0fekpsr.bkt.clouddn.com/AC%E7%AE%97%E6%B3%95_4.png)
+![](http://oi0fekpsr.bkt.clouddn.com/AC%E7%AE%97%E6%B3%95_4.png#mirages-width=590&mirages-height=410&mirages-cdn-type=1)
 
 我们此时是知道已匹配成功的字符串的，即“chi”。
 
@@ -40,7 +44,7 @@ AC算法的核心就是**在所有给定的单词中，找到这样的一个单�
 
 （4）
 
-![](http://oi0fekpsr.bkt.clouddn.com/AC%E7%AE%97%E6%B3%95_5.png)
+![](http://oi0fekpsr.bkt.clouddn.com/AC%E7%AE%97%E6%B3%95_5.png#mirages-width=590&mirages-height=410&mirages-cdn-type=1)
 
 此时“t”是匹配的，在文本“chitchat”中找到一个单词“hit”。
 
@@ -50,7 +54,7 @@ AC算法的核心就是**在所有给定的单词中，找到这样的一个单�
 
 在每个结点里设置一个指针（我们称之为fail指针），指向跳转的位置。
 
-![](http://oi0fekpsr.bkt.clouddn.com/AC%E7%AE%97%E6%B3%95_6.png)
+![](http://oi0fekpsr.bkt.clouddn.com/AC%E7%AE%97%E6%B3%95_6.png#mirages-width=590&mirages-height=410&mirages-cdn-type=1)
 
 对于跳转位置的选择，基于以下两点：
 
@@ -95,7 +99,7 @@ private:
 public:
     AC();
     ~AC();
-    void _destroy(Node * _t);
+    void destroy(Node * t);
     void add(char * s);
     void build_fail_pointer();
     int ac_automaton(char * t);
@@ -108,15 +112,15 @@ AC::AC()
 
 AC::~AC()
 {
-    _destroy(root);
+    destroy(root);
 }
 
-void AC::_destroy(Node * _t)
+void AC::destroy(Node * t)
 {
     for (int i = 0; i < TREE_WIDTH; i++)
-        if (_t->next[i])
-            _destroy(_t->next[i]);
-    delete _t;
+        if (t->next[i])
+            destroy(t->next[i]);
+    delete t;
 }
 
 void AC::add(char * s)
@@ -241,4 +245,4 @@ int main()
 
 运行截图如下：
 
-![](http://oi0fekpsr.bkt.clouddn.com/AC%E7%AE%97%E6%B3%95_7.png)
+![](http://oi0fekpsr.bkt.clouddn.com/AC%E7%AE%97%E6%B3%95_7.png#mirages-width=330&mirages-height=450&mirages-cdn-type=1)
