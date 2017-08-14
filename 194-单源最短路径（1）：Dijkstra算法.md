@@ -149,7 +149,7 @@ int main()
 
 输入数据，结果为：
 
-![](http://oi0fekpsr.bkt.clouddn.com/%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84_2.png#mirages-width=356&mirages-height=277&mirages-cdn-type=1)
+![](http://oi0fekpsr.bkt.clouddn.com/%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84__2.png)
 
 ## 四：时间复杂度
 设图的边数为m，顶点数为n。
