@@ -64,7 +64,7 @@ int dist[100];         //源点到顶点i的最短距离
 int path[100];         //记录最短路的路径
 int source;            //源点
 int vertex_num;        //顶点数
-int arc_num;           //弧数
+int arc_num;           //边数
 
 void Dijkstra(int source)
 {
@@ -95,7 +95,7 @@ void Dijkstra(int source)
 		for (int j = 0; j < vertex_num; j++)  //更新dist数组
 		{
 			if (visited[j] == false && 
-				matrix[min_cost_index][j] != INT_MAX &&  //确保两点之间有弧
+				matrix[min_cost_index][j] != INT_MAX &&  //确保两点之间有边
 				matrix[min_cost_index][j] + min_cost < dist[j])
 			{
 				dist[j] = matrix[min_cost_index][j] + min_cost;
@@ -109,14 +109,14 @@ int main()
 {
 	cout << "请输入图的顶点数（<100）：";
 	cin >> vertex_num;
-	cout << "请输入图的弧数：";
+	cout << "请输入图的边数：";
 	cin >> arc_num;
 
 	for (int i = 0; i < vertex_num; i++)
 		for (int j = 0; j < vertex_num; j++)
 			matrix[i][j] = (i != j) ? INT_MAX : 0;  //初始化matrix数组
 
-	cout << "请输入弧的信息：\n";
+	cout << "请输入边的信息：\n";
 	int u, v, w;
 	for (int i = 0; i < arc_num; i++)
 	{
