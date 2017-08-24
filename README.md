@@ -14,5 +14,5 @@
 
 ### 2. 如何寻找文章 markdown 原文？
 
-每篇文章链接尾都有一个唯一 cid 数字标识，例如文章链接 http://www.61mon.com/index.php/archives/196/ ，196 即为该文章的 cid，在此项目内寻找 196 即可。
+每篇文章链接尾都有一个唯一 cid 数字标识，例如文章链接 https://61mon.com/index.php/archives/196/ ，196 即为该文章的 cid，在此项目内寻找 196 即可。
 
