@@ -6,7 +6,7 @@ Aho–Corasick算法（也称AC算法，AC自动机）是由Alfred V. Aho和Marg
 
 与其它模式串匹配不同，KMP算法是单模式串的匹配算法，AC算法是多模式串的匹配算法，匹配所需的时间复杂度是$O(n)$。
 
-AC算法建立在字典树基础上，如果您还不了解字典树，可以参考[字典树入门](http://www.61mon.com/index.php/archives/215/)。
+AC算法建立在字典树基础上，如果您还不了解字典树，可以参考[字典树入门](https://61mon.com/index.php/archives/215/)。
 
 
 <!--more-->
