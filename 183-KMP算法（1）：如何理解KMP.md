@@ -1,21 +1,27 @@
 >系列文章目录
 >
 >KMP 算法（1）：如何理解 KMP
->[KMP算法（2）：其细微之处](http://www.61mon.com/index.php/archives/192/)
+>[KMP算法（2）：其细微之处](https://61mon.com/index.php/archives/192/)
 
-# 一：背景
-给定一个主字符串（以 S 代替）和模式串（以 P 代替），要求找出 P 在 S 中出现的位置，即串的模式匹配问题。今天来介绍解决这一问题的常用算法之一，Knuth-Morris-Pratt 算法（简称 KMP），这个算法是由高德纳（Donald Ervin Knuth）和沃恩·普拉特在1974年构思，同年詹姆斯·H·莫里斯也独立地设计出该算法，最终由三人于1977年联合发表。
+## 一：背景
 
-在继续下面的内容之前，有必要在这里介绍下两个概念：**真前缀**和**真后缀**。
-![](http://oi0fekpsr.bkt.clouddn.com/KMP%E7%AE%97%E6%B3%95__1.png#mirages-width=590&mirages-height=360&mirages-cdn-type=1)
+给定一个主串（以 S 代替）和模式串（以 P 代替），要求找出 P 在 S 中出现的位置，此即串的模式匹配问题。
+
+Knuth-Morris-Pratt 算法（简称 KMP）是解决这一问题的常用算法之一，这个算法是由高德纳（Donald Ervin Knuth）和沃恩·普拉特在1974年构思，同年詹姆斯·H·莫里斯也独立地设计出该算法，最终三人于1977年联合发表。
+
+在继续下面的内容之前，有必要在这里介绍下两个概念：**真前缀** 和 **真后缀**。
+
+![](https://61mon.com/images/illustrations/KMP/1.png)
+
 由上图所得， "真前缀"指除了自身以外，一个字符串的全部头部组合；"真后缀"指除了自身以外，一个字符串的全部尾部组合。（网上很多博客，应该说是几乎所有的博客，也包括我以前写的，都是“前缀”。严格来说，“真前缀”和“前缀”是不同的，既然不同，还是不要混为一谈的好！）
 
 
 <!--more-->
 
 
-# 二：朴素字符串匹配算法
-初遇串的模式匹配问题，我们脑海中的第一反应，必是朴素字符串匹配（暴力匹配），即遍历 S 的每个字符，以该字符为始与 P 比较，全部匹配就输出；否则直到 S 结束。代码如下：
+## 二：朴素字符串匹配算法
+
+初遇串的模式匹配问题，我们脑海中的第一反应，就是朴素字符串匹配（即所谓的暴力匹配），代码如下：
 ```c++
 /* 字符串下标始于0 */
 int NaiveStringSearch(string S, string P)
@@ -45,39 +51,57 @@ int NaiveStringSearch(string S, string P)
 	return -1;
 }
 ```
-上述算法的时间复杂度为 $O(nm)$，其中 $n$ 为 S 的长度，$m$ 为 P 的长度。这种时间复杂度很难满足我们的需求，接下来进入正题：时间复杂度为 $Θ(n+m)$ 的 KMP 算法。
+暴力匹配的时间复杂度为 $O(nm)$，其中 $n$ 为 S 的长度，$m$ 为 P 的长度。很明显，这样的时间复杂度很难满足我们的需求。
 
-# 三：KMP字符串匹配算法
-## 3.1 算法流程
+接下来进入正题：时间复杂度为 $Θ(n+m)$ 的 KMP 算法。
+
+## 三：KMP字符串匹配算法
+
+### 3.1 算法流程
+
 以下摘自阮一峰的[字符串匹配的KMP算法](http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html)，并作稍微修改。
 
 （1）
-![](http://oi0fekpsr.bkt.clouddn.com/KMP%E7%AE%97%E6%B3%95_2.png)
+
+![](https://61mon.com/images/illustrations/KMP/2.png)
+
 首先，主串"BBC ABCDAB ABCDABCDABDE"的第一个字符与模式串"ABCDABD"的第一个字符，进行比较。因为B与A不匹配，所以模式串后移一位。
 
 （2）
-![](http://oi0fekpsr.bkt.clouddn.com/KMP%E7%AE%97%E6%B3%95_3.png)
+
+![](https://61mon.com/images/illustrations/KMP/3.png)
+
 因为B与A又不匹配，模式串再往后移。
 
 （3）
-![](http://oi0fekpsr.bkt.clouddn.com/KMP%E7%AE%97%E6%B3%95_4.png)
+
+![](https://61mon.com/images/illustrations/KMP/4.png)
+
 就这样，直到主串有一个字符，与模式串的第一个字符相同为止。
 
 （4）
-![](http://oi0fekpsr.bkt.clouddn.com/KMP%E7%AE%97%E6%B3%95_5.png)
+
+![](https://61mon.com/images/illustrations/KMP/5.png)
+
 接着比较主串和模式串的下一个字符，还是相同。
 
 （5）
-![](http://oi0fekpsr.bkt.clouddn.com/KMP%E7%AE%97%E6%B3%95_6.png)
+
+![](https://61mon.com/images/illustrations/KMP/6.png)
+
 直到主串有一个字符，与模式串对应的字符不相同为止。
 
 （6）
-![](http://oi0fekpsr.bkt.clouddn.com/KMP%E7%AE%97%E6%B3%95_7.png)
+
+![](https://61mon.com/images/illustrations/KMP/7.png)
+
 这时，最自然的反应是，将模式串整个后移一位，再从头逐个比较。这样做虽然可行，但是效率很差，因为你要把"搜索位置"移到已经比较过的位置，重比一遍。
 
 （7）
-![](http://oi0fekpsr.bkt.clouddn.com/KMP%E7%AE%97%E6%B3%95_8.png)
-一个基本事实是，当空格与D不匹配时，你其实知道前面六个字符是"ABCDAB"。KMP算法的想法是，设法利用这个已知信息，不要把"搜索位置"移回已经比较过的位置，而是继续把它向后移，这样就提高了效率。
+
+![](https://61mon.com/images/illustrations/KMP/8.png)
+
+一个基本事实是，当空格与D不匹配时，你其实是已经知道前面六个字符是"ABCDAB"。KMP算法的想法是，设法利用这个已知信息，不要把"搜索位置"移回已经比较过的位置，而是继续把它向后移，这样就提高了效率。
 
 （8）
 
@@ -85,29 +109,41 @@ int NaiveStringSearch(string S, string P)
 | :-----: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :---: |
 |   模式串   |  A   |  B   |  C   |  D   |  A   |  B   |  D   | '\\0' |
 | next[i] |  -1  |  0   |  0   |  0   |  0   |  1   |  2   |   0   |
+
 怎么做到这一点呢？可以针对模式串，设置一个跳转数组`int next[]`，这个数组是怎么计算出来的，后面再介绍，这里只要会用就可以了。
 
 （9）
-![](http://oi0fekpsr.bkt.clouddn.com/KMP%E7%AE%97%E6%B3%95_9.png)
+
+![](https://61mon.com/images/illustrations/KMP/9.png)
+
 已知空格与D不匹配时，前面六个字符"ABCDAB"是匹配的。根据跳转数组可知，不匹配处D的next值为2，因此接下来**从模式串下标为2的位置开始匹配**。
 
 （10）
-![](http://oi0fekpsr.bkt.clouddn.com/KMP%E7%AE%97%E6%B3%95_10.png)
+
+![](https://61mon.com/images/illustrations/KMP/10.png)
+
 因为空格与Ｃ不匹配，C处的next值为0，因此接下来模式串从下标为0处开始匹配。
 
 （11）
-![](http://oi0fekpsr.bkt.clouddn.com/KMP%E7%AE%97%E6%B3%95_11.png)
+
+![](https://61mon.com/images/illustrations/KMP/11.png)
+
 因为空格与A不匹配，此处next值为-1，表示模式串的第一个字符就不匹配，那么直接往后移一位。
 
 （12）
-![](http://oi0fekpsr.bkt.clouddn.com/KMP%E7%AE%97%E6%B3%95_12.png)
+
+![](https://61mon.com/images/illustrations/KMP/12.png)
+
 逐位比较，直到发现C与D不匹配。于是，下一步从下标为2的地方开始匹配。
 
 （13）
-![](http://oi0fekpsr.bkt.clouddn.com/KMP%E7%AE%97%E6%B3%95_13.png)
+
+![](https://61mon.com/images/illustrations/KMP/13.png)
+
 逐位比较，直到模式串的最后一位，发现完全匹配，于是搜索完成。
 
-## 3.2 next数组是如何求出的
+### 3.2 next数组是如何求出的
+
 next数组的求解基于“真前缀”和“真后缀”，即`next[i]`等于`P[0]...P[i - 1]`最长的相同真前后缀的长度（请暂时忽视i等于0时的情况，下面会有解释）。我们依旧以上述的表格为例，为了方便阅读，我复制在下方了。
 
 |     i     |  0   |  1   |  2   |  3   |  4   |  5   |  6   |   7   |
@@ -128,7 +164,7 @@ next数组的求解基于“真前缀”和“真后缀”，即`next[i]`等于`
 
 有的读者可能存在疑问，若在`i = 5`时匹配失败，按照我讲解的思路，此时应该把`i = 1`处的字符拿过来继续比较，但是这两个位置的字符是一样的啊，都是`B`，既然一样，拿过来比较不就是无用功了么？其实不是我讲解的有问题，也不是这个算法有问题，而是这个算法还未优化，关于这个问题在下面会详细说明，不过建议读者不要在这里纠结，跳过这个，下面你自然会恍然大悟。
 
-思路如此简单，接下来的问题就是代码实现了，如下：
+思路如此简单，接下来就是代码实现了，如下：
 
 ```c++
 /* P为模式串，下标从0开始 */
@@ -152,35 +188,30 @@ void GetNext(string P, int next[])
 	}
 }
 ```
-一脸懵逼，是不是。。。
+一脸懵逼，是不是。。。上述代码就是用来求解模式串中每个位置的`next[]`值。
 
-上述代码是求解每个位置的next值，即求解每个位置前面字符串的最长相同真前后缀的长度。下面具体分析，我把代码分为3部分来讲：
+下面具体分析，我把代码分为两部分来讲：
 
-**（1）：i的作用是什么？**
-i为模式串P的下标，从0开始，程序中我们依次求出`next[i]`的值，这很简单。
+**（1）：i和j的作用是什么？**
 
-**（2）：j的作用是什么？**
-其一，从if语句中`P[i] == P[j]`，它作为模式串的下标，判断下一个字符是否相等。其二，从`next[i] = j;`可以很容易推断出，j代表最长相同真前后缀的长度。两者在数值上正好相等。（之所以正好相等，是因为i和j初始化的时候，正好差1，这点读者仔细思考下就能明白的）
+i和j就像是两个”指针“，一前一后，通过移动它们来找到最长的相同真前后缀。
 
-**（3）：if...else...语句里做了什么？**
-首先我们要明确一个事实：若此时`i = 3`，那么我们接下来要求解的便是`P[0]...p[3]`的最长相同真前后缀的长度，也就是`next[4]`，而非`next[3]`，这从下面的代码就可以得到证明：
+**（2）：if...else...语句里做了什么？**
 
-```c++
-i++;
-j++;
-next[i] = j;
-```
-有了这个事实，下面具体分析：
-![](http://oi0fekpsr.bkt.clouddn.com/KMP%E7%AE%97%E6%B3%95__14.png)
-假设i和j的位置如上图，由`next[i] = j`得，也就是对于位置i来说，区段**0到i - 1**的最长相同真前后缀分别是**0到j - 1**和**i - j到i - 1**，即这两区段内容相同。
+![](https://61mon.com/images/illustrations/KMP/14.png)
+
+假设i和j的位置如上图，由`next[i] = j`得，也就是对于位置i来说，**0到i - 1**的最长相同真前后缀分别是**0到j - 1**和**i - j到i - 1**，即这两区段内容相同。
 
 按照算法流程，`if (P[i] == P[j])`，则`i++; j++; next[i] = j;`；若不等，则`j = next[j]`，见下图：
-![](http://oi0fekpsr.bkt.clouddn.com/KMP%E7%AE%97%E6%B3%95___15.png)
+
+![](https://61mon.com/images/illustrations/KMP/15.png)
+
 `next[j]`代表**0到j - 1**区段中最长相同真前后缀的长度。如图，用左侧两个椭圆来表示这个最长相同真前后缀，即这两个椭圆代表的区段内容相同；同理，右侧也有相同的两个椭圆。所以else语句就是利用第一个椭圆和第四个椭圆内容相同来加快得到**0到i - 1**区段的相同真前后缀的长度。
 
 细心的朋友会问if语句中`j == -1`存在的意义是何？第一，程序刚运行时，j是被初始为-1，直接进行`P[i] == P[j]`判断无疑会边界溢出；第二，else语句中`j = next[j]`，j是不断后退的，若j在后退中被赋值为-1（也就是`j = next[0]`），在`P[i] == P[j]`判断也会边界溢出。综上两点，其意义就是为了特殊边界判断。
 
-# 四：完整代码
+## 四：完整代码
+
 ```c++
 /**
  * 
@@ -188,15 +219,17 @@ next[i] = j;
  * date   2017-03-05
  * mode   C++ 
  */
-#include<iostream>
-#include<string>
+
+#include <iostream>
+#include <string>
+
 using namespace std;
 
-/* P为模式串，下标从0开始 */
+/* P 为模式串，下标从 0 开始 */
 void GetNext(string P, int next[])
 {
 	int p_len = P.size();
-	int i = 0;   //P的下标
+	int i = 0;   // P 的下标
 	int j = -1;  
 	next[0] = -1;
 
@@ -213,28 +246,28 @@ void GetNext(string P, int next[])
 	}
 }
 
-/* 在S中找到P第一次出现的位置 */
+/* 在 S 中找到 P 第一次出现的位置 */
 int KMP(string S, string P, int next[])
 {
 	GetNext(P, next);
 
-	int i = 0;  //S的下标
-	int j = 0;  //P的下标
+	int i = 0;  // S 的下标
+	int j = 0;  // P 的下标
 	int s_len = S.size();
 	int p_len = P.size();
 
 	while (i < s_len && j < p_len)
 	{
-		if (j == -1 || S[i] == P[j])  //P的第一个字符不匹配或S[i] == P[j]
+		if (j == -1 || S[i] == P[j])  // P 的第一个字符不匹配或 S[i] == P[j]
 		{
 			i++;
 			j++;
 		}
 		else
-			j = next[j];  //当前字符匹配失败，进行跳转
+			j = next[j];  // 当前字符匹配失败，进行跳转
 	}
 
-	if (j == p_len)  //匹配成功
+	if (j == p_len)  // 匹配成功
 		return i - j;
 	
 	return -1;
@@ -244,24 +277,38 @@ int main()
 {
 	int next[100] = { 0 };
 
-	cout << KMP("bbc abcdab abcdabcdabde", "abcdabd", next) << endl; //15
+	cout << KMP("bbc abcdab abcdabcdabde", "abcdabd", next) << endl; // 15
 	
 	return 0;
 }
 ```
 
-# 五：KMP优化
+## 五：算法复杂度分析
+
+在`GetNext()`和`KMP()`中，我们观察`i` 的移动，一直往前不回溯，所以它们所耗的时间都是线性的，两者相加为$Θ(m+n)$。
+
+KMP算法的时间复杂度还是很稳定的。
+
+- 平均时间复杂度为$Θ(m+n)$。
+
+- 最好时间复杂度为$O(m+(n-m))=O(n)$。它发生在主串和模式串字符都不相同的情况下，例如，主串为`abcdefghijk`，模式串为`+-*/`。
+
+- 最差时间复杂度为$O(m+n)$。它发生在主串和模式串都为相同的字符的情况下，例如，主串为`aaaaaaaaaaaaaaaaaaaaa`，模式串为`aaaa`。
+
+## 五：KMP优化
+
 |     i     |  0   |  1   |  2   |  3   |  4   |  5   |  6   |   7   |
 | :-------: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :---: |
 |    模式串    |  A   |  B   |  C   |  D   |  A   |  B   |  D   | '\\0' |
 | next[ i ] |  -1  |  0   |  0   |  0   |  0   |  1   |  2   |   0   |
+
 以3.2的表格为例（已复制在上方），若在`i = 5`时匹配失败，按照3.2的代码，此时应该把`i = 1`处的字符拿过来继续比较，但是这两个位置的字符是一样的，都是`B`，既然一样，拿过来比较不就是无用功了么？这我在3.2已经解释过，之所以会这样是因为KMP不够完美。那怎么改写代码就可以解决这个问题呢？很简单。
 ```c++
-/* P为模式串，下标从0开始 */
+/* P 为模式串，下标从 0 开始 */
 void GetNextval(string P, int nextval[])
 {
 	int p_len = P.size();
-	int i = 0;   //P的下标
+	int i = 0;   // P 的下标
 	int j = -1;  
 	nextval[0] = -1;
 
@@ -271,10 +318,11 @@ void GetNextval(string P, int nextval[])
 		{
 			i++;
 			j++;
+          
 			if (P[i] != P[j])
 			    nextval[i] = j;
 			else
-			    nextval[i] = nextval[j];  //既然相同就继续往前找真前缀
+			    nextval[i] = nextval[j];  // 既然相同就继续往前找真前缀
 		}
 		else
 			j = nextval[j];
@@ -289,6 +337,7 @@ void GetNextval(string P, int nextval[])
 
 所以，该采用哪个版本，取决于你在现实中遇到的实际问题。
 
-**参考文献：**
-[ 1 ] 严蔚敏. 数据结构（C语言版）
-[ 2 ] 阮一峰. [字符串匹配的KMP算法](http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html)
+## 六：参考文献
+
+- 严蔚敏. 数据结构（C语言版）
+- 阮一峰. [字符串匹配的KMP算法](http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html)
