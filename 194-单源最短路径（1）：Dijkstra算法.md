@@ -1,9 +1,9 @@
 > 系列文章目录
 >
 > 单源最短路径（1）：Dijkstra算法
-> [单源最短路径（2）：Bellman_Ford算法](http://www.61mon.com/index.php/archives/195/)
-> [单源最短路径（3）：SPFA算法](http://www.61mon.com/index.php/archives/196/)
-> [单源最短路径（4）：总结](http://www.61mon.com/index.php/archives/200/)
+> [单源最短路径（2）：Bellman_Ford算法](https://61mon.com/index.php/archives/195/)
+> [单源最短路径（3）：SPFA算法](https://61mon.com/index.php/archives/196/)
+> [单源最短路径（4）：总结](https://61mon.com/index.php/archives/200/)
 
 ## 一：背景
 Dijkstra算法（中文名：迪杰斯特拉算法）是由荷兰计算机科学家Edsger Wybe Dijkstra提出。该算法常用于路由算法或者作为其他图算法的一个子模块。举例来说，如果图中的顶点表示城市，而边上的权重表示城市间开车行经的距离，该算法可以用来找到两个城市之间的最短路径。
@@ -14,7 +14,8 @@ Dijkstra算法（中文名：迪杰斯特拉算法）是由荷兰计算机科学
 
 ## 二：算法过程
 我们用一个例子来具体说明迪杰斯特拉算法的流程。
-![](http://oi0fekpsr.bkt.clouddn.com/%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84__1.png#mirages-width=450&mirages-height=380&mirages-cdn-type=1)
+
+![](https://61mon.com/images/illustrations/SingleSourceShortestPaths/1.png)
 
 定义源点为0，`dist[i]`为源点0到顶点i的最短路径。其过程描述如下：
 
@@ -38,7 +39,7 @@ Dijkstra算法（中文名：迪杰斯特拉算法）是由荷兰计算机科学
 
 对于上述步骤，你可能存在以下的疑问：
 
-![](http://oi0fekpsr.bkt.clouddn.com/%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84_3.png#mirages-width=460&mirages-height=360&mirages-cdn-type=1)
+![](https://61mon.com/images/illustrations/SingleSourceShortestPaths/2.png)
 
 若A作为源点，与其邻接的只有B，C，D三点，其`dist[]`最小时顶点为C，即就可以确定`A→C`为A到C的最短路。但是我们存在疑问的是：**是否还存在另一条路径使A到C的距离更小？** 用反证法证明。
 
@@ -55,20 +56,22 @@ Dijkstra算法（中文名：迪杰斯特拉算法）是由荷兰计算机科学
 * date   2017-05-17
 * mode   C++
 */
-#include<iostream>
+
+#include <iostream>
+
 using namespace std;
 
-int matrix[100][100];  //邻接矩阵
-bool visited[100];     //标记数组
-int dist[100];         //源点到顶点i的最短距离
-int path[100];         //记录最短路的路径
-int source;            //源点
-int vertex_num;        //顶点数
-int arc_num;           //边数
+int matrix[100][100];  // 邻接矩阵
+bool visited[100];     // 标记数组
+int dist[100];         // 源点到顶点i的最短距离
+int path[100];         // 记录最短路的路径
+int source;            // 源点
+int vertex_num;        // 顶点数
+int arc_num;           // 边数
 
 void Dijkstra(int source)
 {
-	memset(visited, 0, sizeof(visited));  //初始化标记数组
+	memset(visited, 0, sizeof(visited));  // 初始化标记数组
 	visited[source] = true;
 	for (int i = 0; i < vertex_num; i++)
 	{
@@ -76,26 +79,26 @@ void Dijkstra(int source)
 		path[i] = source;
 	}
 
-	int min_cost;        //权值最小
-	int min_cost_index;  //权值最小的下标
-	for (int i = 1; i < vertex_num; i++)  //找到源点到另外vertex_num-1个点的最短路径
+	int min_cost;        // 权值最小
+	int min_cost_index;  // 权值最小的下标
+	for (int i = 1; i < vertex_num; i++)  // 找到源点到另外 vertex_num-1 个点的最短路径
 	{
 		min_cost = INT_MAX;
 		for (int j = 0; j < vertex_num; j++)
 		{
-			if (visited[j] == false && dist[j] < min_cost)  //找到权值最小
+			if (visited[j] == false && dist[j] < min_cost)  // 找到权值最小
 			{
 				min_cost = dist[j];
 				min_cost_index = j;
 			}
 		}
 
-		visited[min_cost_index] = true;  //该点已找到，进行标记
+		visited[min_cost_index] = true;  // 该点已找到，进行标记
 
-		for (int j = 0; j < vertex_num; j++)  //更新dist数组
+		for (int j = 0; j < vertex_num; j++)  // 更新 dist 数组
 		{
 			if (visited[j] == false && 
-				matrix[min_cost_index][j] != INT_MAX &&  //确保两点之间有边
+				matrix[min_cost_index][j] != INT_MAX &&  // 确保两点之间有边
 				matrix[min_cost_index][j] + min_cost < dist[j])
 			{
 				dist[j] = matrix[min_cost_index][j] + min_cost;
@@ -114,7 +117,7 @@ int main()
 
 	for (int i = 0; i < vertex_num; i++)
 		for (int j = 0; j < vertex_num; j++)
-			matrix[i][j] = (i != j) ? INT_MAX : 0;  //初始化matrix数组
+			matrix[i][j] = (i != j) ? INT_MAX : 0;  // 初始化 matrix 数组
 
 	cout << "请输入边的信息：\n";
 	int u, v, w;
@@ -149,7 +152,7 @@ int main()
 
 输入数据，结果为：
 
-![](http://oi0fekpsr.bkt.clouddn.com/%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84__2.png)
+![](https://61mon.com/images/illustrations/SingleSourceShortestPaths/3.png)
 
 ## 四：时间复杂度
 设图的边数为m，顶点数为n。
@@ -179,7 +182,7 @@ Dijkstra算法最简单的实现方法是用一个数组来存储所有顶点的
 
 Dijkstra算法有个巨大的缺陷，请考虑下面这幅图：
 
-![](http://oi0fekpsr.bkt.clouddn.com/%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84_4.png#mirages-width=550&mirages-height=300&mirages-cdn-type=1)
+![](https://61mon.com/images/illustrations/SingleSourceShortestPaths/4.png)
 
 `u→v`间存在一条负权回路（所谓的负权回路，维基和百科并未收录其名词，但从网上的一致态度来看，其含义为：如果存在一个环（从某个点出发又回到自己的路径），而且这个环上所有权值之和是负数，那这就是一个负权环，也叫负权回路），那么只要无限次地走这条负权回路，便可以无限制地减少它的最短路径权值，这就变相地说明最短路径不存在。一个不存在最短路径的图，Dijkstra算法无法检测出这个问题，其最后求解的`dist[]`也是错的。
 
