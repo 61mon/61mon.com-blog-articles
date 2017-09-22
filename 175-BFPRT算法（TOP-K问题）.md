@@ -39,12 +39,12 @@ BFPRT()调用GetPivotIndex()和Partition()来求解第k小，在这过程中，G
 
 ```c++
 /**
-  * BFPRT算法（前K小数问题）
-  *
-  * author : 刘毅（Limer）
-  * date   : 2017-01-25
-  * mode   : C++
-  */
+ * BFPRT算法（前K小数问题）
+ *
+ * author : 刘毅（Limer）
+ * date   : 2017-01-25
+ * mode   : C++
+ */
 #include <iostream>
 #include <algorithm>
 
