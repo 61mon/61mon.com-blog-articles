@@ -51,23 +51,23 @@ Dijkstra算法（中文名：迪杰斯特拉算法）是由荷兰计算机科学
 
 ```c++
 /**
-*
-* author 刘毅（Limer）
-* date   2017-05-17
-* mode   C++
-*/
+ *
+ * author : 刘毅（Limer）
+ * date   : 2017-05-17
+ * mode   : C++
+ */
 
 #include <iostream>
 
 using namespace std;
 
-int matrix[100][100];  // 邻接矩阵
+int  matrix[100][100]; // 邻接矩阵
 bool visited[100];     // 标记数组
-int dist[100];         // 源点到顶点i的最短距离
-int path[100];         // 记录最短路的路径
-int source;            // 源点
-int vertex_num;        // 顶点数
-int arc_num;           // 边数
+int  dist[100];        // 源点到顶点i的最短距离
+int  path[100];        // 记录最短路的路径
+int  source;           // 源点
+int  vertex_num;       // 顶点数
+int  arc_num;          // 边数
 
 void Dijkstra(int source)
 {
@@ -81,9 +81,11 @@ void Dijkstra(int source)
 
 	int min_cost;        // 权值最小
 	int min_cost_index;  // 权值最小的下标
+  
 	for (int i = 1; i < vertex_num; i++)  // 找到源点到另外 vertex_num-1 个点的最短路径
 	{
 		min_cost = INT_MAX;
+      
 		for (int j = 0; j < vertex_num; j++)
 		{
 			if (visited[j] == false && dist[j] < min_cost)  // 找到权值最小
