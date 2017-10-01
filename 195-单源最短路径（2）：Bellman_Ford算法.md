@@ -54,18 +54,18 @@ using namespace std;
 
 #define MAX 10000  // 假设权值最大不超过 10000
 
-struct Edge
+struct Side
 {
     int u;
     int v;
     int w;
 };
 
-Edge edge[10000]; // 记录所有边
+Side side[10000]; // 记录所有边
 int  dist[100];   // 源点到顶点 i 的最短距离
 int  path[100];   // 记录最短路的路径
 int  vertex_num;  // 顶点数
-int  edge_num;    // 边数
+int  side_num;    // 边数
 int  source;      // 源点  
 
 bool BellmanFord()
@@ -77,12 +77,12 @@ bool BellmanFord()
     // n-1 次循环求最短路径
     for (int i = 1; i <= vertex_num - 1; i++)
     {
-        for (int j = 0; j < edge_num; j++)
+        for (int j = 0; j < side_num; j++)
         {
-            if (dist[edge[j].v] > dist[edge[j].u] + edge[j].w)
+            if (dist[side[j].v] > dist[side[j].u] + side[j].w)
             {
-                dist[edge[j].v] = dist[edge[j].u] + edge[j].w;
-                path[edge[j].v] = edge[j].u;
+                dist[side[j].v] = dist[side[j].u] + side[j].w;
+                path[side[j].v] = side[j].u;
             }
         }
     }
@@ -90,9 +90,9 @@ bool BellmanFord()
     bool flag = true;  // 标记是否有负权回路
 
     // 第 n 次循环判断负权回路
-    for (int i = 0; i < edge_num; i++)
+    for (int i = 0; i < side_num; i++)
     {
-        if (dist[edge[i].v] > dist[edge[i].u] + edge[i].w)
+        if (dist[side[i].v] > dist[side[i].u] + side[i].w)
         {
             flag = false;
             break;
@@ -134,11 +134,11 @@ int main()
 {
 
     cout << "请输入图的顶点数，边数，源点：";
-    cin >> vertex_num >> edge_num >> source;
+    cin >> vertex_num >> side_num >> source;
 
-    cout << "请输入" << edge_num << "条边的信息：\n";
-    for (int i = 0; i < edge_num; i++)
-        cin >> edge[i].u >> edge[i].v >> edge[i].w;
+    cout << "请输入" << side_num << "条边的信息：\n";
+    for (int i = 0; i < side_num; i++)
+        cin >> side[i].u >> side[i].v >> side[i].w;
 
     if (BellmanFord())
         Print();
