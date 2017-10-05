@@ -67,7 +67,7 @@ int  dist[100];        // 源点到顶点i的最短距离
 int  path[100];        // 记录最短路的路径
 int  source;           // 源点
 int  vertex_num;       // 顶点数
-int  side_num;         // 边数
+int  edge_num;         // 边数
 
 void Dijkstra(int source)
 {
@@ -115,7 +115,7 @@ int main()
     cout << "请输入图的顶点数（<100）：";
     cin >> vertex_num;
     cout << "请输入图的边数：";
-    cin >> side_num;
+    cin >> edge_num;
 
     for (int i = 0; i < vertex_num; i++)
         for (int j = 0; j < vertex_num; j++)
@@ -123,7 +123,7 @@ int main()
 
     cout << "请输入边的信息：\n";
     int u, v, w;
-    for (int i = 0; i < side_num; i++)
+    for (int i = 0; i < edge_num; i++)
     {
         cin >> u >> v >> w;
         matrix[u][v] = matrix[v][u] = w;
