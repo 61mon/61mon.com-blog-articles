@@ -148,6 +148,3 @@ while (s_new[i - p[i]] == s_new[i + p[i]])
 
 综上，**Manacher算法的时间复杂度为$O(n)$**。
 
-## 五：参考文献
-
-- CSDN. Stephen文. [hdu3068之manacher算法+详解](http://blog.csdn.net/xingyeyongheng/article/details/9310555).
