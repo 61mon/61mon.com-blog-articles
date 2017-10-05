@@ -1,6 +1,10 @@
 Dijkstra算法与Prim算法非常相似，甚至很多初学者觉得它们就是一样的。它们最直观的区别就是目的不同：前者求解最短路径，后者求解最小生成树。
 
-![](http://oi0fekpsr.bkt.clouddn.com/Dijkstra%E7%AE%97%E6%B3%95%E4%B8%8EPrim%E7%AE%97%E6%B3%95%E7%9A%84%E5%8C%BA%E5%88%AB_1.png)
+![](https://61mon.com/images/illustrations/DijkstraAndPrim/1.png)
+
+
+<!--more-->
+
 
 对比上图，
 
@@ -26,7 +30,7 @@ Dijkstra算法与Prim算法都有一个数组，不妨统一称为`R[]`，我们
 * 最短路径
 
   ```
-  for the weight of arc(u->v)
+  for the weight of side(u->v)
       if R[v] > R[u] + weight
           R[v] = R[u] + weight
   ```
@@ -34,7 +38,7 @@ Dijkstra算法与Prim算法都有一个数组，不妨统一称为`R[]`，我们
 * 最小生成树
 
   ```
-  for the weight of arc(u->v)
+  for the weight of side(u->v)
       if R[v] > weight
           R[v] = weight
   ```
