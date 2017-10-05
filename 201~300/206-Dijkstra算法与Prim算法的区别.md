@@ -30,7 +30,7 @@ Dijkstra算法与Prim算法都有一个数组，不妨统一称为`R[]`，我们
 * 最短路径
 
   ```
-  for the weight of side(u->v)
+  for the weight of edge(u->v)
       if R[v] > R[u] + weight
           R[v] = R[u] + weight
   ```
@@ -38,7 +38,7 @@ Dijkstra算法与Prim算法都有一个数组，不妨统一称为`R[]`，我们
 * 最小生成树
 
   ```
-  for the weight of side(u->v)
+  for the weight of edge(u->v)
       if R[v] > weight
           R[v] = weight
   ```
