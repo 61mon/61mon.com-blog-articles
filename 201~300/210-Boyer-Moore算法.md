@@ -411,8 +411,6 @@ void BM(string & s, int & n, string & p, int & m)
             j += max(bc[s[i + j]] - m + 1 + i, gs[i]);
     }
 
-    cout << endl;
-  
     // PS: 匹配失败不作处理
 }
 
@@ -421,12 +419,12 @@ int main()
     string s, p;
     int n, m;
   
-    while (1)
+    while (cin >> s >> p)
     {
-        cin >> s >> p;
         n = s.size();
         m = p.size();
         BM(s, n, p, m);
+        cout << endl;
     }
   
     return 0;
