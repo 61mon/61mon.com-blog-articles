@@ -8,6 +8,10 @@ Sparse Table算法（以下简称ST算法）是用来解决以下问题的，
 
 算法的基本思想就是对串中所有可能的区间组合的最值用二维数组保存，也就是所谓的预处理，查询时直接通过数组下标获取，$O(1)$的时间。下面采用动态规划来对数串进行预处理，也就是填充二维数组。
 
+
+<!--more-->
+
+
 ## 二：算法过程分析
 
 我们以区间最大值查询为例。
@@ -46,14 +50,22 @@ void RMQ(int array[], int n)
 
 预处理完成。最后查询操作代码怎么写呢？对于查询区间$[i,j]$，我们分成两部分，即下图的两个矩形，长度相等，大小等于$⌊log_2(j-i+1)⌋$。
 
-![](http://oi0fekpsr.bkt.clouddn.com/SparseTable%E7%AE%97%E6%B3%95_1.png)
+![](https://61mon.com/images/illustrations/sparse_table/1.png)
 
 ## 三：完整代码
 
 ```c++
+/**
+ *
+ * author : 刘毅（Limer）
+ * date   : 2017-08-05
+ * mode   : C++
+ */
+
 #include <iostream>
 #include <algorithm>
 #include <cmath>
+
 using namespace std;
 
 const int ROW = 1000;
@@ -96,7 +108,7 @@ int main()
 
 运行截图如下：
 
-![](http://oi0fekpsr.bkt.clouddn.com/SparseTable%E7%AE%97%E6%B3%95_2.png)
+![](https://61mon.com/images/illustrations/sparse_table/2.png)
 
 ## 四：总结
 
