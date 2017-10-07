@@ -321,9 +321,9 @@ for (int i = 0; i <= m - 2; i++)
 ```c++
 /**
  * 
- * author 刘毅（Limer）
- * date   2017-07-26
- * mode   C++ 
+ * author : 刘毅（Limer）
+ * date   : 2017-07-26
+ * mode   : C++ 
  */
 
 #include <iostream>
