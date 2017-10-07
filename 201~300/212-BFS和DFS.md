@@ -10,19 +10,23 @@
 
 举个典型例子，如下图，灰色代表墙壁，绿色代表起点，红色代表终点，规定每次只能走一步，且只能往下或右走。求一条绿色到红色的最短路径。
 
-![](http://oi0fekpsr.bkt.clouddn.com/BFS%E5%92%8CDFS_1.png)
+
+<!--more-->
+
+
+![](https://61mon.com/images/illustrations/bfs_and_dfs/1.png)
 
 对于上面的问题，BFS和DFS都可以求出结果，它们的区别就是在复杂度上存在差异。我可以先告诉你，该题BFS是较佳算法。
 
 ### BFS
 
-![](http://oi0fekpsr.bkt.clouddn.com/BFS%E5%92%8CDFS_2.gif)
+![](https://61mon.com/images/illustrations/bfs_and_dfs/2.gif)
 
 如上图所示，从起点出发，对于每次出队列的点，都要遍历其四周的点。所以说BFS的搜索过程和“湖面丢进一块石头激起层层涟漪”很相似，此即“广度优先搜索算法”中“广度”的由来。
 
 ### DFS
 
-![](http://oi0fekpsr.bkt.clouddn.com/BFS%E5%92%8CDFS_3.gif)
+![](https://61mon.com/images/illustrations/bfs_and_dfs/3.gif)
 
 如上图所示，从起点出发，先把一个方向的点都遍历完才会改变方向，接着再把改变后方向上的点都遍历完.......所以说，DFS的搜索过程和“不撞南墙不回头”很相似，此即“深度优先搜索算法”中“深度”的由来。
 
