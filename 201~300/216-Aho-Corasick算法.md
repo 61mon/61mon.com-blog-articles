@@ -18,25 +18,25 @@ AC算法建立在字典树基础上，如果您还不了解字典树，可以参
 
 （1）
 
-![](http://oi0fekpsr.bkt.clouddn.com/AC%E7%AE%97%E6%B3%95_1.png#mirages-width=590&mirages-height=410&mirages-cdn-type=1)
+![](https://61mon.com/images/illustrations/aho_corasick/1.png)
 
 根据单词{"china", "hit", "use"}建立字典树。
 
 （2）
 
-![](http://oi0fekpsr.bkt.clouddn.com/AC%E7%AE%97%E6%B3%95_2.png#mirages-width=590&mirages-height=410&mirages-cdn-type=1)
+![](https://61mon.com/images/illustrations/aho_corasick/2.png)
 
 根据所给文本“chitchat”依次匹配，图中所示“chi”为匹配成功的字符串。
 
 （3）
 
-![](http://oi0fekpsr.bkt.clouddn.com/AC%E7%AE%97%E6%B3%95_3.png#mirages-width=590&mirages-height=410&mirages-cdn-type=1)
+![](https://61mon.com/images/illustrations/aho_corasick/3.png)
 
 当匹配到第四个字符时，“t”和“n”匹配失败。
 
 （4）
 
-![](http://oi0fekpsr.bkt.clouddn.com/AC%E7%AE%97%E6%B3%95_4.png#mirages-width=590&mirages-height=410&mirages-cdn-type=1)
+![](https://61mon.com/images/illustrations/aho_corasick/4.png)
 
 我们此时是知道已匹配成功的字符串的，即“chi”。
 
@@ -44,7 +44,7 @@ AC算法的核心就是**在所有给定的单词中，找到这样的一个单�
 
 （4）
 
-![](http://oi0fekpsr.bkt.clouddn.com/AC%E7%AE%97%E6%B3%95_5.png#mirages-width=590&mirages-height=410&mirages-cdn-type=1)
+![](https://61mon.com/images/illustrations/aho_corasick/5.png)
 
 此时“t”是匹配的，在文本“chitchat”中找到一个单词“hit”。
 
@@ -54,7 +54,7 @@ AC算法的核心就是**在所有给定的单词中，找到这样的一个单�
 
 在每个结点里设置一个指针（我们称之为fail指针），指向跳转的位置。
 
-![](http://oi0fekpsr.bkt.clouddn.com/AC%E7%AE%97%E6%B3%95_6.png#mirages-width=590&mirages-height=410&mirages-cdn-type=1)
+![](https://61mon.com/images/illustrations/aho_corasick/6.png)
 
 对于跳转位置的选择，基于以下两点：
 
@@ -67,16 +67,18 @@ AC算法的核心就是**在所有给定的单词中，找到这样的一个单�
 
 ```c++
 /**
-*
-* author 刘毅（Limer）
-* date   2017-08-10
-* mode   C++
-*/
+ *
+ * author : 刘毅（Limer）
+ * date   : 2017-08-10
+ * mode   : C++
+ */
+
 #include <iostream>
 #include <queue>
-using namespace std;
 
 #define TREE_WIDTH 26
+
+using namespace std;
 
 struct Node
 {
@@ -245,4 +247,4 @@ int main()
 
 运行截图如下：
 
-![](http://oi0fekpsr.bkt.clouddn.com/AC%E7%AE%97%E6%B3%95_7.png#mirages-width=330&mirages-height=450&mirages-cdn-type=1)
+![](https://61mon.com/images/illustrations/aho_corasick/7.png)
