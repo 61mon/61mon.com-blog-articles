@@ -70,9 +70,7 @@ using namespace std;
 
 const int ROW = 1000;
 const int COLUMN = 10;  // log(1000)/log(2.0) ~ 9.96
-
 int f[ROW][COLUMN];
-int minarray[ROW][COLUMN];
 
 void RMQ(int array[], int n)
 {
@@ -100,7 +98,7 @@ int main()
     {
         int k = log(j - i + 1.0) / log(2.0);
         int max_ans = max(f[i][k], f[j - (1 << k) + 1][k]);
-        cout << "最大值是： " << max_ans << endl;
+        cout << "最大值是： " << max_ans << endl << endl;
     }
     return 0;
 }
